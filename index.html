@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>README Preview</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    a { color: #90caf9; }
+    pre {
+      background-color: #1e1e1e;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    code {
+      background-color: #2c2c2c;
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      color: #ffffff;
+      margin-top: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <div id="content">Loading README.md...</div>
+
+  <script>
+    fetch('./README.md')
+      .then(res => {
+        if (!res.ok) throw new Error("Could not load README.md");
+        return res.text();
+      })
+      .then(md => {
+        document.getElementById("content").innerHTML = marked.parse(md);
+      })
+      .catch(err => {
+        document.getElementById("content").textContent = "Failed to load README.md.";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
